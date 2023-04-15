@@ -1,25 +1,37 @@
 #!/usr/bin/python3
+"""
+This module retrieves all the states from the hbtn_0e_0_usa database and
+prints them in ascending order by ID.
+"""
+
 import MySQLdb
 import sys
 
-# Gather command line args
-mysql_username = sys.argv[1]
-mysql_password = sys.argv[2]
-db_name = sys.argv[3]
+if __name__ == '__main__':
+    # Retrieve command-line arguments
+    username = sys.argv[1]
+    password = sys.argv[2]
+    database = sys.argv[3]
 
-# Connect to MySQL server
-db = MySQLdb.connect(user=mysql_username, passwd=mysql_password, db=db_name, port=3306, host="localhost")
+    # Connect to MySQL server
+    conn = MySQLdb.connect(
+        host='localhost',
+        port=3306,
+        user=username,
+        passwd=password,
+        db=database
+    )
 
-# Create cursor and execute query
-cur = db.cursor()
-cur.execute("SELECT * FROM states ORDER BY id ASC")
+    # Retrieve all states from the database
+    cur = conn.cursor()
+    cur.execute("SELECT * FROM states ORDER BY id ASC")
+    rows = cur.fetchall()
 
-# Fetch results and display them
-query_results = cur.fetchall()
-for row in query_results:
-    print(row)
+    # Print the states in the desired format
+    for row in rows:
+        print(row)
 
-# Close cursor and database connection
-cur.close()
-db.close()
+    # Clean up
+    cur.close()
+    conn.close()
 
