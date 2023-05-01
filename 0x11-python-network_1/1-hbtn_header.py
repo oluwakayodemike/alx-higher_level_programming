@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """
-This script takes a URL as a command-line argument and sends a request to the URL. 
-It retrieves the value of the 'X-Request-Id' header from the response and displays it.
+This script takes a URL as a command-line argument nd sends a request to d URL.
+It retrieves the value of the 'X-Request-Id' header frm d response to display.
 """
 
 import urllib.request
