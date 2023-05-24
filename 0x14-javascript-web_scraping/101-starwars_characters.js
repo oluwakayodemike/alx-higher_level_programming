@@ -11,7 +11,6 @@ request.get(apiUrl, (error, response, body) => {
   } else {
     const movie = JSON.parse(body);
     const characterUrls = movie.characters;
-    let charactersProcessed = 0;
 
     characterUrls.forEach((characterUrl) => {
       request.get(characterUrl, (error, response, body) => {
@@ -20,12 +19,6 @@ request.get(apiUrl, (error, response, body) => {
         } else {
           const character = JSON.parse(body);
           console.log(character.name);
-          charactersProcessed++;
-
-          if (charactersProcessed === characterUrls.length) {
-            // All characters processed
-            process.exit();
-          }
         }
       });
     });
